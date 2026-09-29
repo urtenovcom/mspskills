@@ -1,6 +1,6 @@
 'use client';
 import {useId,useState} from 'react';
-import {Check,ChevronDown,ChevronUp,Code2,Copy,Download,ExternalLink,Globe,Layers,Package,Server} from 'lucide-react';
+import {Check,ChevronDown,ChevronUp,Code2,Copy,Download,ExternalLink,Globe,Layers,Package,Server,HardDrive} from 'lucide-react';
 import {getInstallation} from './installation';
 
 type Entry={name:string;type:string;description:string;details:string;tags:string;github:string;website:string;installation:string;image:string;created:string;updated:string};
@@ -19,7 +19,7 @@ export default function EntryDetail({entry,category}:{entry:Entry;category:strin
  const chooseMode=(v:string)=>{setMode(v);setCopied('');};
  const date=(value:string)=>new Date(value).toLocaleDateString('ru-RU');
  return <div className="skill-layout"><main className="skill-main">
-  <div className="skill-heading"><span className={'type-badge '+entry.type}>{entry.type==='skill'?<Layers size={14}/>:entry.type==='bundle'?<Package size={14}/>:<Server size={14}/>} {entry.type==='skill'?'Skill':entry.type==='bundle'?'Набор / плагин':'MCP-сервер'}</span><span className="muted">{category}</span></div>
+  <div className="skill-heading"><span className={'type-badge '+entry.type}>{entry.type==='skill'?<Layers size={14}/>:entry.type==='bundle'?<Package size={14}/>:entry.type==='self-host'?<HardDrive size={14}/>:<Server size={14}/>} {entry.type==='skill'?'Skill':entry.type==='bundle'?'Набор / плагин':entry.type==='self-host'?'Self-host':'MCP-сервер'}</span><span className="muted">{category}</span></div>
   <h1 className="skill-title">{entry.name}</h1><p className="detail-lead">{entry.description}</p>
   {entry.tags&&<div className="tags skill-tags">{entry.tags.split(',').map(t=>t.trim()).filter(Boolean).map(t=><span key={t}>#{t}</span>)}</div>}
   <dl className="skill-meta"><div><dt>Репозиторий</dt><dd>{repository||'Не указан'}</dd></div><div><dt>Добавлено</dt><dd>{date(entry.created)}</dd></div><div><dt>Обновлено</dt><dd>{date(entry.updated)}</dd></div></dl>
@@ -33,5 +33,5 @@ export default function EntryDetail({entry,category}:{entry:Entry;category:strin
   </section>}
   {install.command&&install.notes&&<section className="skill-section"><h2>Настройка и использование</h2><p className="preserve">{install.notes}</p></section>}
   {entry.details&&<section className="skill-section"><h2>Описание</h2><p className="preserve">{entry.details}</p></section>}
- </main><aside className="skill-side"><div className="source-box"><div className="source-title"><span className="glyph blue">{entry.image&&!imageFailed?<img className="item-image" src={entry.image} alt="" onError={()=>setImageFailed(true)}/>:<Code2 size={23}/>}</span><div><strong>{repoMatch?.[1]||'Источники'}</strong>{repository&&<p>{repository}</p>}</div></div>{entry.github&&<a className="secondary" href={entry.github} target="_blank" rel="noopener noreferrer"><Code2 size={16}/>Исходные файлы<ExternalLink size={14}/></a>}{repoUrl&&<a className="secondary" href={repoUrl} target="_blank" rel="noopener noreferrer">Репозиторий на GitHub<ExternalLink size={14}/></a>}{entry.website&&<a className="secondary" href={entry.website} target="_blank" rel="noopener noreferrer"><Globe size={16}/>Сайт<ExternalLink size={14}/></a>}</div><div className="source-note"><h3>Категория</h3><p>{category}</p><h3>Тип инструмента</h3><p>{entry.type==='skill'?'Навык для AI-ассистента':entry.type==='bundle'?'Набор / плагин':'MCP-сервер'}</p></div></aside></div>;
+ </main><aside className="skill-side"><div className="source-box"><div className="source-title"><span className="glyph blue">{entry.image&&!imageFailed?<img className="item-image" src={entry.image} alt="" onError={()=>setImageFailed(true)}/>:<Code2 size={23}/>}</span><div><strong>{repoMatch?.[1]||'Источники'}</strong>{repository&&<p>{repository}</p>}</div></div>{entry.github&&<a className="secondary" href={entry.github} target="_blank" rel="noopener noreferrer"><Code2 size={16}/>Исходные файлы<ExternalLink size={14}/></a>}{repoUrl&&<a className="secondary" href={repoUrl} target="_blank" rel="noopener noreferrer">Репозиторий на GitHub<ExternalLink size={14}/></a>}{entry.website&&<a className="secondary" href={entry.website} target="_blank" rel="noopener noreferrer"><Globe size={16}/>Сайт<ExternalLink size={14}/></a>}</div><div className="source-note"><h3>Категория</h3><p>{category}</p><h3>Тип инструмента</h3><p>{entry.type==='skill'?'Навык для AI-ассистента':entry.type==='bundle'?'Набор / плагин':entry.type==='self-host'?'Self-host':'MCP-сервер'}</p></div></aside></div>;
 }

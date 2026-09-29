@@ -31,3 +31,5 @@
 @media(max-width:550px){.admin-sidebar .admin-exit{float:none;display:flex;margin-top:10px;padding:10px 4px}.admin-categories .dialog-body{padding:17px}}
 
 .type-choice{flex-wrap:wrap}.type-choice>button{flex:1 1 190px}.type-badge.bundle{background:#f0edf9;color:#7151aa}
+
+.type-badge.self-host{background:#eaf5f0;color:#287657}.tabs{overflow-x:auto;max-width:100%;scrollbar-width:thin}
