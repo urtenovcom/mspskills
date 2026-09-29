@@ -1,6 +1,8 @@
 type InstallEntry={name:string;type:string;github:string;installation:string};
 export function getInstallation(entry:InstallEntry){
  const raw=entry.installation.trim();
+ const custom=raw.match(/^ПРОМПТ\n([\s\S]+?)\nКОМАНДА\n([^\n]+)\nПРИМЕЧАНИЯ\n([\s\S]*)$/);
+ if(custom)return {source:entry.github,prompt:custom[1].trim(),command:custom[2].trim(),notes:custom[3].trim(),claude:''};
  const match=raw.match(/https:\/\/github\.com\/[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+\/tree\/[A-Za-z0-9_./-]+/);
  const candidate=match?.[0]||entry.github;
  const valid=/^https:\/\/github\.com\/[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+\/tree\/[A-Za-z0-9_./-]+$/.test(candidate)&&candidate.includes('/skills/');
