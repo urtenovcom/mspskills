@@ -37,3 +37,6 @@
 /* Keep the page width stable when filtering changes its height. */
 html{scrollbar-gutter:stable}
 @supports not (scrollbar-gutter:stable){html{overflow-y:scroll}}
+
+/* Selection changes color and underline without changing tab geometry. */
+.tabs button,.tabs button.active{font-weight:650}
