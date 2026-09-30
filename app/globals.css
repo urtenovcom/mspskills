@@ -32,4 +32,8 @@
 
 .type-choice{flex-wrap:wrap}.type-choice>button{flex:1 1 190px}.type-badge.bundle{background:#f0edf9;color:#7151aa}
 
-.type-badge.self-host{background:#eaf5f0;color:#287657}.tabs{overflow-x:auto;max-width:100%;scrollbar-width:thin}
+.type-badge.self-host{background:#eaf5f0;color:#287657}.tabs{flex-wrap:wrap;max-width:100%;min-width:0}
+
+/* Keep the page width stable when filtering changes its height. */
+html{scrollbar-gutter:stable}
+@supports not (scrollbar-gutter:stable){html{overflow-y:scroll}}
